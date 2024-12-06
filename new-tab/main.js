@@ -13,6 +13,7 @@ const FILES_URL = "chrome://file-manager";
 const HELP_URL = "https://github.com/bypassiwastaken/skiovox-helper";
 const WEBSTORE_URL = "https://chromewebstore.google.com";
 const ADDSESSION_URL = "https://accounts.google.com/signin/v2/identifier?hl=en&continue=https%3A%2F%2Fwww.google.com%2F&ec=GAlAmgQ&flowName=GlifWebSignIn&flowEntry=AddSession";
+const OS_SETTINGS_URL = "chrome://os-settings"
 
 let [
     help,
@@ -26,15 +27,19 @@ let [
     wifi,
     bluetooth,
     files,
-    settings
+    settings,
+    os
 ] = document.querySelectorAll('svg')
-
 let version = document.querySelector('.version')
 let date = document.querySelector('.date')
 let time = document.querySelector('.time')
 let battery = document.querySelector('.battery')
 
 version.textContent = "v" + chrome.runtime.getManifest().version
+
+os.addEventListener('click', () => {
+    chrome.tabs.create({ url: OS_SETTINGS_URL })
+})
 
 wifi.addEventListener('click', () => {
     chrome.tabs.create({ url: WIFI_URL })
